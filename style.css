@@ -13,17 +13,13 @@ body {
 }
 
 #calculator {
-	position: relative;
 	border: 2px solid #fff;
 	border-radius: 15px;
-	width: 350px;
-	height: 450px;
+	padding: 30px;
 }
 
 .container {
-	position: absolute;
-	top: 40px;
-	left: 35px;
+	max-width: 280px;
 	display: flex;
 	flex-wrap: wrap-reverse;
 }
@@ -61,7 +57,10 @@ button:hover {
 	opacity: 0.7;
 }
 
+button:nth-child(2) {
+	opacity: 0;
+}
+
 .math-operator {
 	color: #343aee;
 }
-

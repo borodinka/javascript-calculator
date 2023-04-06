@@ -2,6 +2,7 @@ const add = (a, b) => a + b;
 const substract = (a, b) => a - b;
 const multiply = (a, b) => a * b;
 const divide = (a, b) => a / b;
+const separators = ['+', '-', '×', '÷'];
 
 document.addEventListener('click', function(event) {
 	const isButton = event.target.nodeName === 'BUTTON';
@@ -16,32 +17,36 @@ document.addEventListener('click', function(event) {
 		alert('Number is too large!');
 		return;
 	}
+
+	if((separators.some((sep) => expression.innerText.includes(sep))) && 
+		(separators.includes(event.target.textContent))) {
+		expression.innerText = calculateExpression(expression);
+	}
 		
 	if (event.target !== equalsSymbol) {
 		expression.innerText += event.target.textContent;
 	} else {
-		const separators = ['+', '-', '×', '÷'];
-		for (i of separators) {
-			if (!expression.innerText.includes(i)) continue;
-				let elements = expression.innerText.split(i);
-
-			switch (i) {
-				case '+':
-					expression.innerText = add(Number(elements[0]), Number(elements[1]));
-					break;
-				case '-':
-					expression.innerText = substract(Number(elements[0]), Number(elements[1]));
-					break;
-				case '×':
-					expression.innerText = multipl(Number(elements[0]), Number(elements[1]));
-					break;
-				case '÷':
-					expression.innerText = (divide(Number(elements[0]), Number(elements[1]))).toFixed(3);
-					break;
-				default:
-					alert('Invalid value!');
-			}
-		}
+		expression.innerText = calculateExpression(expression);
 	}
 });
 
+function calculateExpression(expression) {
+	for (let separator of separators) {
+		if (!expression.innerText.includes(separator)) continue;
+
+		let elements = expression.innerText.split(separator);
+
+		switch (separator) {
+			case '+':
+				return add(Number(elements[0]), Number(elements[1]));
+			case '-':
+				return substract(Number(elements[0]), Number(elements[1]));
+			case '×':
+				return multiply(Number(elements[0]), Number(elements[1]));
+			case '÷':
+				return (divide(Number(elements[0]), Number(elements[1]))).toFixed(3);
+			default:
+				alert('Invalid value!');
+		}
+	}
+}

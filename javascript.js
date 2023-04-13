@@ -5,9 +5,7 @@ const divide = (a, b) => a / b;
 const separators = ['+', '-', '×', '÷'];
 
 document.addEventListener('click', function(event) {
-	const isButton = event.target.nodeName === 'BUTTON';
-
-	if (!isButton) return;
+	if(!event.target.matches('button')) return;
 
 	const equalsSymbol = document.getElementById('equals');
 	let expression = document.getElementById('input-line');

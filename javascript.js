@@ -42,7 +42,9 @@ function calculateExpression(expression) {
 			case '×':
 				return multiply(Number(elements[0]), Number(elements[1]));
 			case '÷':
-				return (divide(Number(elements[0]), Number(elements[1]))).toFixed(3);
+				return (Number(elements[0]) % Number(elements[1]) === 0) ? 
+					divide(Number(elements[0]), Number(elements[1])) : 
+				(divide(Number(elements[0]), Number(elements[1]))).toFixed(3);
 			default:
 				alert('Invalid value!');
 		}
